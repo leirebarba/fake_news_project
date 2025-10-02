@@ -1,0 +1,17 @@
+name: fake_news_project
+channels:
+  - conda-forge
+dependencies:
+  - pandas
+  - python
+  - pytorch 
+  - numpy 
+  - kagglehub
+  - scikit-learn
+  - scipy
+  - matplotlib
+  - seaborn
+  - ntlk
+  - spaCy
+  - transformers
+  
