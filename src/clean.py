@@ -137,3 +137,26 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+    # --- add this at the end of src/clean.py ---
+
+def get_clean_df() -> pd.DataFrame:
+    """Return the cleaned dataset so other scripts (like embeddings) can import it."""
+    path = Path("artifacts/preprocessed_news.csv")
+    if not path.exists():
+        raise FileNotFoundError(
+            "Run src/clean.py first to generate artifacts/preprocessed_news.csv"
+        )
+
+    df = pd.read_csv(path)
+
+    # Keep only the cleaned text column and rename it to 'text'
+    if "clean_text" in df.columns:
+        # drop any duplicate 'text' columns that might already exist
+        dup_text_cols = [c for c in df.columns if c == "text"]
+        if dup_text_cols:
+            df = df.drop(columns=dup_text_cols)
+        df = df.rename(columns={"clean_text": "text"})
+
+    return df
+

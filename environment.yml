@@ -16,4 +16,5 @@ dependencies:
   - transformers
   - pytest
   - pip
+  - sentence-transformers
   

@@ -1,0 +1,8 @@
+{
+  "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+  "embedding_dim": 384,
+  "n_samples": 50,
+  "normalize": true,
+  "text_col": "text",
+  "label_col": "label"
+}

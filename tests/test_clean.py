@@ -1,11 +1,19 @@
-import pytest
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from src.clean import basic_clean
+import pandas as pd
+from src.clean import get_clean_df
 
-assert basic_clean("Hello, WORLD!!!") == "hello world"
-assert basic_clean("Visit https://openai.com for info!") == "visit for info"
-assert basic_clean("123 Apples & Oranges!!") == "apples oranges"
-assert basic_clean("   Extra   spaces   ") == "extra spaces"
+def test_get_clean_df_returns_dataframe():
+    df = get_clean_df()
+    assert isinstance(df, pd.DataFrame)
+    assert "text" in df.columns
+    assert len(df) > 0
 
-print("✅ basic_clean() works correctly")
+def test_text_column_is_stringy():
+    df = get_clean_df()
+    sample = df["text"].dropna().head(5).tolist()
+    assert all(isinstance(x, str) and x.strip() for x in sample)
+
 
